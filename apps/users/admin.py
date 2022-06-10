@@ -46,14 +46,14 @@ class UserAdmin(BaseUserAdmin):
             {
                 'fields': ('last_login', 'date_joined')
             }
-        ),
+        )
     )
 
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
             "fields": ("email", "password1", "password2", "is_staff", "is_active"),
-        })
+        },),
     )
 
     search_fields = ['email', 'username', 'first_name', 'last_name']

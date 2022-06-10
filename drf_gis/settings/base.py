@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.utils.log import DEFAULT_LOGGING
 import logging.config
 import logging
@@ -36,6 +37,7 @@ DJANGO_APPS = [
     'django.contrib.sites',
 ]
 
+# https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 
 
@@ -45,7 +47,9 @@ THIRD_PARTY_APPS = [
     'django_countries',
     'phonenumber_field',
     'django.contrib.gis',
+    'djoser',
     'rest_framework_gis',
+    'rest_framework_simplejwt',
     'leaflet',
 ]
 
@@ -117,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "America/Edmonton"
 
 USE_I18N = True
 
@@ -140,8 +144,54 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'users.User'
 
+# use restframework-jwt library
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#project-configuration
+# https://djoser.readthedocs.io/en/latest/authentication_backends.html
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    )
+}
+
+# provide datetime for JWT token generation
+# setup JWT token generation
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
+# https://djoser.readthedocs.io/en/latest/authentication_backends.html
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'SIGNING_KEY': env('SECRET_KEY'),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+}
+
+# Djoser Authentication setups
+# https://djoser.readthedocs.io/en/latest/settings.html
+JOSER = {
+    "LOGIN_FIELD": "email",
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "ACTIVATION_URL": "activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": True,
+    'SERIALIZERS': {
+        "user_create": "apps.users.serializers.UserCreateSerializer,",
+        "user": "apps.users.serializers.UserSerializer,",
+        "current_user": "apps.users.serializers.UserSerializer,",
+        "user_delete": "apps.users.serializers.UserDeleteSerializer,",
+    },
+
+}
 
 logger = logging.getLogger(__name__)
 
