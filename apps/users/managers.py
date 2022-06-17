@@ -18,13 +18,13 @@ class CustomUserManager(BaseUserManager):
 
     def create_user(self, username, first_name, last_name, email, password, **extra_fields):
         if not username:
-            raise ValueError(_('Userd must submit a username'))
+            raise ValueError(_('User must submit a username'))
 
         if not first_name:
-            raise ValueError(_('Userd must submit a first name'))
+            raise ValueError(_('User must submit a first name'))
 
         if not last_name:
-            raise ValueError(_('Userd must submit a last name'))
+            raise ValueError(_('User must submit a last name'))
 
         if email:
             email = self.normalize_email(email)
@@ -37,9 +37,9 @@ class CustomUserManager(BaseUserManager):
             first_name=first_name,
             last_name=last_name,
             email=email,
-            **extra_fields
+            ** extra_fields
         )
-
+        print(user.id)
         user.set_password(password)
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)

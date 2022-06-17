@@ -3,9 +3,9 @@ from .models import Profile
 
 
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["id", "pkid", "user", "phone_number", "country", "city"]
-    list_filter = ["country", "city"]
-    list_display_links = ["id", "pkid", "user"]
+    list_display = ["id", "user", "role", "phone_number", "country", "city"]
+    list_filter = ["role", "country", "city"]
+    list_display_links = ["id", "user"]
 
 
 admin.site.register(Profile, ProfileAdmin)

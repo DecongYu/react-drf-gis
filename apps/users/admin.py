@@ -12,17 +12,18 @@ class UserAdmin(BaseUserAdmin):
     model = User
 
     list_display = [
-        'pkid',
+        # 'pkid',
         'id',
         'email',
         'username',
         'first_name',
         'last_name',
         'is_staff',
-        'is_active']
+        'is_active',
+    ]
 
-    list_display_links = ['id', 'email']
-    list_filter = ['email', 'username', 'first_name', 'last_name', 'is_staff']
+    list_display_links = ['id', 'email', 'username', ]
+    list_filter = ['email', 'username', 'first_name', 'last_name', 'is_staff', 'is_active', ]
 
     fieldsets = (
         (
@@ -56,7 +57,7 @@ class UserAdmin(BaseUserAdmin):
         },),
     )
 
-    search_fields = ['email', 'username', 'first_name', 'last_name']
+    search_fields = ['username', 'email', 'first_name', 'last_name']
 
 
 admin.site.register(User, UserAdmin)

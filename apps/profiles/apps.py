@@ -6,4 +6,4 @@ class ProfilesConfig(AppConfig):
     name = 'apps.profiles'
 
     def ready(self):
-        from ..profiles import signals  # noqa
+        from . import signals  # noqa
