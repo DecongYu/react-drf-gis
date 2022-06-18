@@ -15,3 +15,29 @@ A breif presentation of the project can be found in the blog section of this web
 ## 3. American Navy Vessel Tracking Map
 
 ## 4. Canadadian Stock Analytics Application
+
+### APIs
+
+# 1. jwt user login api path:
+
+localhost:8080/api/v1/auth/jwt/create/
+{
+"email": 'user.example@email.com',
+"password": 'mypassword'
+}
+two jwt tokens are generated "refresh": and "access":
+the "access" token will be used for all the operations permitted unser the user credentials.
+
+# 2. get all the agents:
+
+localhost:8080/api/v1/profile/agents/all/
+
+# 3. get all the top agents:
+
+localhost:8080/api/v1/profile/top-agents/all/
+
+# 4. get all user's profile:
+
+localhost:8080/api/v1/profile/me/
+
+# 5.

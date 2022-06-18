@@ -9,6 +9,8 @@ EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'decong.yu@gmail.com'
+DOMAIN = env("DOMAIN")
+SITE_NAME = "drf_gis"
 
 # To create a postgres or postgis database for Django backends
 # https://hatarilabs.com/ih-en/how-to-install-postgresql-and-postgis-in-windows-10-with-wsl-and-debian-tutorial

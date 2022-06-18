@@ -152,9 +152,12 @@ AUTH_USER_MODEL = 'users.User'
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#project-configuration
 # https://djoser.readthedocs.io/en/latest/authentication_backends.html
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication"
-    )
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
 }
 
 # provide datetime for JWT token generation
@@ -190,6 +193,7 @@ JOSER = {
         "current_user": "apps.users.serializers.UserSerializer,",
         "user_delete": "apps.users.serializers.UserDeleteSerializer,",
     },
+
 
 }
 
