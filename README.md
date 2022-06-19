@@ -40,4 +40,6 @@ localhost:8080/api/v1/profile/top-agents/all/
 
 localhost:8080/api/v1/profile/me/
 
-# 5.
+# 5. Update profile:
+
+localhost:8000/api/v1/profile/update/<username>/
