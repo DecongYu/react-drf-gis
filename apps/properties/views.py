@@ -17,6 +17,9 @@ from .serializers import (PropertyCreateSerializer, PropertySerializer,
 logger = logging.getLogger(__name__)
 
 
+# querysets API reference: a QuerySet can be constructed, filtered, sliced,
+# and generally passed around without actually hitting the databas.
+# https://docs.djangoproject.com/en/3.2/ref/models/querysets/
 class PropertyFilter(django_filters.FilterSet):
 
     advert_type = django_filters.CharFilter(
@@ -123,7 +126,8 @@ def update_property_api_view(request, slug):
 def create_property_api_view(request):
     user = request.user
     data = request.data
-    data["user"] = request.user.pkid
+    data._mutable = True
+    data["user"] = request.user.id
     serializer = PropertyCreateSerializer(data=data)
 
     if serializer.is_valid():

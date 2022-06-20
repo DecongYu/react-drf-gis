@@ -73,11 +73,11 @@ class Property(TimeStampedUUIDModel):
         default=999999,
     )
     price = models.DecimalField(
-        verbose_name=_("Price"), max_digits=8, decimal_places=2, default=0.0
+        verbose_name=_("Price"), max_digits=12, decimal_places=2, default=0.0
     )
     tax = models.DecimalField(
         verbose_name=_("Property Tax"),
-        max_digits=6,
+        max_digits=8,
         decimal_places=2,
         default=0.15,
         help_text="5% property tax charged",
@@ -88,7 +88,7 @@ class Property(TimeStampedUUIDModel):
     total_floors = models.IntegerField(verbose_name=_("Number of floors"), default=0)
     bedrooms = models.IntegerField(verbose_name=_("Bedrooms"), default=1)
     bathrooms = models.DecimalField(
-        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=2, default=1.0
+        verbose_name=_("Bathrooms"), max_digits=4, decimal_places=1, default=1.0
     )
     advert_type = models.CharField(
         verbose_name=_("Advert Type"),
