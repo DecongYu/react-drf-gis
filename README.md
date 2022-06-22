@@ -25,6 +25,7 @@ localhost:8080/api/v1/auth/jwt/create/
 "email": 'user.example@email.com',
 "password": 'mypassword'
 }
+
 two jwt tokens are generated "refresh": and "access":
 the "access" token will be used for all the operations permitted unser the user credentials.
 

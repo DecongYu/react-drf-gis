@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
     'rest_framework_gis',
     'rest_framework_simplejwt',
     'leaflet',
+    'gmailapi_backend',
 ]
 
 LOCAL_APPS = [
@@ -59,6 +60,7 @@ LOCAL_APPS = [
     'apps.profiles',
     'apps.users',
     'apps.properties',
+    'apps.enquiries',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -169,7 +171,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'SIGNING_KEY': env('SECRET_KEY'),
+    'SIGNING_KEY': env('SIGNING_KEY'),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
