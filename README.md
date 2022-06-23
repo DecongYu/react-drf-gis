@@ -16,9 +16,9 @@ A breif presentation of the project can be found in the blog section of this web
 
 ## 4. Canadadian Stock Analytics Application
 
-### APIs
+# APIs
 
-# 1. jwt user login api path:
+## 1. jwt user login api path:
 
 localhost:8080/api/v1/auth/jwt/create/
 {
@@ -29,18 +29,22 @@ localhost:8080/api/v1/auth/jwt/create/
 two jwt tokens are generated "refresh": and "access":
 the "access" token will be used for all the operations permitted unser the user credentials.
 
-# 2. get all the agents:
+## 2. get all the agents:
 
 localhost:8080/api/v1/profile/agents/all/
 
-# 3. get all the top agents:
+## 3. get all the top agents:
 
 localhost:8080/api/v1/profile/top-agents/all/
 
-# 4. get all user's profile:
+## 4. get all user's profile:
 
 localhost:8080/api/v1/profile/me/
 
-# 5. Update profile:
+## 5. Update profile: <PATCH>
 
 localhost:8000/api/v1/profile/update/<username>/
+
+## 6. Create new user: <POST>
+
+localhost:8000/api/v1/profile/users
