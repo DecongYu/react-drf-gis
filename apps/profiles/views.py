@@ -15,9 +15,9 @@ class AgentsListAPIView(generics.ListAPIView):
 
 
 """
-    
+
     # using function view instead of class view (listAPIView)
-    
+
     from rest_framework import api_view, permissions
 
     @api_view(["GET"])

@@ -1,5 +1,5 @@
 from django_countries.serializer_fields import CountryField
-from django_countries.serializers import CountryFieldMixin
+
 from rest_framework import serializers
 
 from .models import Property, PropertyViews
@@ -75,10 +75,14 @@ class PropertyCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Property
-        exclude = ["updated_at", ]
+        exclude = [
+            "updated_at",
+        ]
 
 
 class PropertyViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = PropertyViews
-        exclude = ["updated_at", ]
+        exclude = [
+            "updated_at",
+        ]

@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     """
-    Manage two different user accout creation methods - 
+    Manage two different user accout creation methods -
     create_user, create_superuser
     """
 
@@ -14,30 +14,32 @@ class CustomUserManager(BaseUserManager):
         try:
             validate_email(email)
         except ValidationError:
-            raise ValueError(_('You must provide an valid email address'))
+            raise ValueError(_("You must provide an valid email address"))
 
-    def create_user(self, username, first_name, last_name, email, password, **extra_fields):
+    def create_user(
+        self, username, first_name, last_name, email, password, **extra_fields
+    ):
         if not username:
-            raise ValueError(_('User must submit a username'))
+            raise ValueError(_("User must submit a username"))
 
         if not first_name:
-            raise ValueError(_('User must submit a first name'))
+            raise ValueError(_("User must submit a first name"))
 
         if not last_name:
-            raise ValueError(_('User must submit a last name'))
+            raise ValueError(_("User must submit a last name"))
 
         if email:
             email = self.normalize_email(email)
             self.email_validator(email)
         else:
-            raise ValueError(_('User Account: An email address is required'))
+            raise ValueError(_("User Account: An email address is required"))
 
         user = self.model(
             username=username,
             first_name=first_name,
             last_name=last_name,
             email=email,
-            ** extra_fields
+            **extra_fields
         )
         print(user.id)
         user.set_password(password)
@@ -47,7 +49,9 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, first_name, last_name, email, password, **extra_fields):
+    def create_superuser(
+        self, username, first_name, last_name, email, password, **extra_fields
+    ):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
@@ -65,9 +69,11 @@ class CustomUserManager(BaseUserManager):
             email = self.normalize_email(email)
             self.email_validator(email)
         else:
-            raise ValueError(_('Admin Account: An email address is required'))
+            raise ValueError(_("Admin Account: An email address is required"))
 
-        user = self.create_user(username, first_name, last_name, email, password, **extra_fields)
+        user = self.create_user(
+            username, first_name, last_name, email, password, **extra_fields
+        )
 
         user.save(using=self._db)
         return user

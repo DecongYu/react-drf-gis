@@ -42,6 +42,7 @@ def create_agent_review(request, profile_id):
             rating=data["rating"],
             comment=data["comment"],
         )
+        review.save()
         reviews = agent_profile.agent_review.all()
         agent_profile.num_reviews = len(reviews)
 

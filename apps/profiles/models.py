@@ -3,7 +3,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
-from apps.users.models import User
 
 from apps.common.models import TimeStampedUUIDModel
 
@@ -18,35 +17,39 @@ class Role(models.TextChoices):
 
 class Profile(TimeStampedUUIDModel):
     user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-    phone_number = PhoneNumberField(verbose_name=_("Phone Number"), max_length=30, default="+14032869011")
+    phone_number = PhoneNumberField(
+        verbose_name=_("Phone Number"), max_length=30, default="+14032869011"
+    )
     about_me = models.TextField(
         verbose_name=_("About me"), default="say something about your role"
     )
-    license = models.CharField(verbose_name=_("User License"), max_length=20, blank=True, null=True)
-    profile_photo = models.ImageField(verbose_name=_("Profile Photo"), default="/profile_default.png")
+    license = models.CharField(
+        verbose_name=_("User License"), max_length=20, blank=True, null=True
+    )
+    profile_photo = models.ImageField(
+        verbose_name=_("Profile Photo"), default="/profile_default.png"
+    )
     role = models.CharField(
         verbose_name=_("Project Role"),
         choices=Role.choices,
         default=Role.OTHER,
-        max_length=20
+        max_length=20,
     )
-    country = CountryField(verbose_name=_("Country"), default="CA", blank=False, null=False)
+    country = CountryField(
+        verbose_name=_("Country"), default="CA", blank=False, null=False
+    )
     city = models.CharField(
         verbose_name=_("City"),
         max_length=180,
         default="Calgary",
         blank=False,
-        null=False
+        null=False,
     )
     is_buyer = models.BooleanField(
-        verbose_name=_("Buyer"),
-        default=False,
-        help_text=_("Buy a licenses?")
+        verbose_name=_("Buyer"), default=False, help_text=_("Buy a licenses?")
     )
     is_seller = models.BooleanField(
-        verbose_name=_("Seller"),
-        default=False,
-        help_text=_("Owner of the license?")
+        verbose_name=_("Seller"), default=False, help_text=_("Owner of the license?")
     )
     is_agent = models.BooleanField(
         verbose_name=_("Agent"), default=False, help_text=_("Are you an agent?")
