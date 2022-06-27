@@ -33,7 +33,7 @@ down-v:
 	docker compose down -v
 
 volume:
-	docker volume inspect estate-src_postgres_data
+	docker volume inspect react-drf-gis_postgres_data
 
 estate-db:
 	docker compose exec postgres-db psql --username=admin --dbname=estate

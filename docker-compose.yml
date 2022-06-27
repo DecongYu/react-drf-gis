@@ -10,29 +10,29 @@ services:
             - .:/app
             - static_volume:/app/staticfiles
             - media_volume:/app/mediafiles
-        expose:
-            - "8000"
+        ports:
+            - "8000:8000"
         env_file:
             - .env
         depends_on:
             - postgres-db
             - redis
         networks:
-            - estate-react
+            - drf-gis
 
-    client:
-        build:
-            context: ./client
-            dockerfile: ./docker/local/Dockerfile
-        restart: on-failure
-        volumes:
-            - ./client:/app
-            - /app/node_modules
-        networks:
-            - estate-react
+    # client:
+    #     build:
+    #         context: ./client
+    #         dockerfile: ./docker/local/Dockerfile
+    #     restart: on-failure
+    #     volumes:
+    #         - ./client:/app
+    #         - /app/node_modules
+    #     networks:
+    #         - drf-gis
 
     postgres-db:
-        image: postgres:12.0-alpine
+        image: postgis/postgis
         ports:
             - "5432:5432"
         volumes:
@@ -42,65 +42,65 @@ services:
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
             - POSTGRES_DB=${POSTGRES_DB}
         networks:
-            - estate-react
-
-    redis:
-        image: redis:5-alpine
-        networks:
-            - estate-react
-
-    celery_worker:
-        build:
-            context: .
-            dockerfile: ./docker/local/django/Dockerfile
-        command: /start-celeryworker
-        volumes:
-            - .:/app
-        env_file:
-            - .env
-        depends_on:
-            - redis
-            - postgres-db
-        networks:
-            - estate-react
-
-    flower:
-        build:
-            context: .
-            dockerfile: ./docker/local/django/Dockerfile
-        command: /start-flower
-        volumes:
-            - .:/app
-        env_file:
-            - .env
-        ports:
-            - "5557:5555"
-        depends_on:
-            - redis
-            - postgres-db
-        networks:
-            - estate-react
-
-    nginx:
-        restart: always
-        depends_on:
-            - api
-        volumes:
-            - static_volume:/app/staticfiles
-            - media_volume:/app/mediafiles
-        build:
-            context: ./docker/local/nginx
-            dockerfile: Dockerfile
-        ports:
-            - "8080:80"
-        networks:
-            - estate-react
+            - drf-gis
 
 networks:
-    estate-react:
+    drf-gis:
         driver: bridge
 
 volumes:
     postgres_data:
     static_volume:
     media_volume:
+    
+    # redis:
+    #     image: redis:5-alpine
+    #     networks:
+    #         - drf-gis
+
+    # celery_worker:
+    #     build:
+    #         context: .
+    #         dockerfile: ./docker/local/django/Dockerfile
+    #     command: /start-celeryworker
+    #     volumes:
+    #         - .:/app
+    #     env_file:
+    #         - .env
+    #     depends_on:
+    #         - redis
+    #         - postgres-db
+    #     networks:
+    #         - drf-gis
+
+    # flower:
+    #     build:
+    #         context: .
+    #         dockerfile: ./docker/local/django/Dockerfile
+    #     command: /start-flower
+    #     volumes:
+    #         - .:/app
+    #     env_file:
+    #         - .env
+    #     ports:
+    #         - "5557:5555"
+    #     depends_on:
+    #         - redis
+    #         - postgres-db
+    #     networks:
+    #         - drf-gis
+
+    # nginx:
+    #     restart: always
+    #     depends_on:
+    #         - api
+    #     volumes:
+    #         - static_volume:/app/staticfiles
+    #         - media_volume:/app/mediafiles
+    #     build:
+    #         context: ./docker/local/nginx
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - "8080:80"
+    #     networks:
+    #         - drf-gis

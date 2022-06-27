@@ -51,7 +51,6 @@ THIRD_PARTY_APPS = [
     'rest_framework_gis',
     'rest_framework_simplejwt',
     'leaflet',
-    'gmailapi_backend',
 ]
 
 LOCAL_APPS = [
