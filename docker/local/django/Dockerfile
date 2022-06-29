@@ -7,13 +7,13 @@ WORKDIR $APP_HOME
 
 # some reference information
 LABEL maintainer='decong.yu@gmail.com'
-LABEL description="Development image for Real Estate Project"
+LABEL description="Development image for drf-gis Project"
 
 # set environment
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# dependency installlation
+# dependency installlation, libgdal-dev for postGIS, ibpq-dev for postgres
 RUN apt-get update \
     && apt-get install -y build-essential \
     && apt-get install -y libgdal-dev \
@@ -49,4 +49,3 @@ RUN chmod +x /start-flower
 
 
 ENTRYPOINT [ "/entrypoint"]
-
