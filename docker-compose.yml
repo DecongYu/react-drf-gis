@@ -43,7 +43,7 @@ services:
             - POSTGRES_DB=${POSTGRES_DB}
         networks:
             - drf-gis
-            
+
     nginx:
         restart: always
         depends_on:
@@ -59,6 +59,43 @@ services:
         networks:
             - drf-gis
 
+    redis:
+        image: redis:5-alpine
+        networks:
+            - drf-gis
+
+    celery_worker:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start-celeryworker
+        volumes:
+            - .:/app
+        env_file:
+            - .env
+        depends_on:
+            - redis
+            - postgres-db
+        networks:
+            - drf-gis
+
+    flower:
+        build:
+            context: .
+            dockerfile: ./docker/local/django/Dockerfile
+        command: /start-flower
+        volumes:
+            - .:/app
+        env_file:
+            - .env
+        ports:
+            - "5557:5555"
+        depends_on:
+            - redis
+            - postgres-db
+        networks:
+            - drf-gis
+
 networks:
     drf-gis:
         driver: bridge
@@ -67,41 +104,3 @@ volumes:
     postgres_data:
     static_volume:
     media_volume:
-    
-    # redis:
-    #     image: redis:5-alpine
-    #     networks:
-    #         - drf-gis
-
-    # celery_worker:
-    #     build:
-    #         context: .
-    #         dockerfile: ./docker/local/django/Dockerfile
-    #     command: /start-celeryworker
-    #     volumes:
-    #         - .:/app
-    #     env_file:
-    #         - .env
-    #     depends_on:
-    #         - redis
-    #         - postgres-db
-    #     networks:
-    #         - drf-gis
-
-    # flower:
-    #     build:
-    #         context: .
-    #         dockerfile: ./docker/local/django/Dockerfile
-    #     command: /start-flower
-    #     volumes:
-    #         - .:/app
-    #     env_file:
-    #         - .env
-    #     ports:
-    #         - "5557:5555"
-    #     depends_on:
-    #         - redis
-    #         - postgres-db
-    #     networks:
-    #         - drf-gis
-

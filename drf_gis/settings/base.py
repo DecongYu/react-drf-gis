@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_gis",
     "rest_framework_simplejwt",
     "leaflet",
-    "dhcelery_email",
+    "djcelery_email",
 ]
 
 LOCAL_APPS = [

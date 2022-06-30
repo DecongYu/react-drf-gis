@@ -6,7 +6,7 @@ set -o nounset
 
 
 worker_ready(){
-    celery -A real_estate inspect ping
+    celery -A drf_gis inspect ping
 }
 
 until worker_ready; do
@@ -17,5 +17,5 @@ done
 >&2 echo 'Celery workers are available and ready!...:-)'
 
 flower \
---app=real_estate \
+--app=drf_gis \
 --broker="${CELERY_BROKER}"

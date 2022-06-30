@@ -1,7 +1,7 @@
 from .base import *
 
 # https://docs.djangoproject.com/en/4.0/topics/email/
-EMAIL_BACKEND = "djcelery_email.backends.Celery.EmailBackend"
+EMAIL_BACKEND = "djcelery_email.backends.CeleryEmailBackend"
 EMAIL_HOST = env("EMAIL_HOST")
 EMAIL_USE_TSL = True
 EMAIL_PORT = env("EMAIL_PORT")
@@ -27,5 +27,5 @@ DATABASES = {
 
 
 CELERY_BROKER_URL = env("CELERY_BROKER")
-CELERY_RESULT_BACKEND = env("CELERY_BACKED")
+CELERY_RESULT_BACKEND = env("CELERY_BACKEND")
 CELERY_TIMEZONE = "US/Mountain"
