@@ -50,6 +50,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_gis",
     "rest_framework_simplejwt",
     "leaflet",
+    "dhcelery_email",
 ]
 
 LOCAL_APPS = [
@@ -122,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "America/Edmonton"
+TIME_ZONE = "US/Mountain"
 
 USE_I18N = True
 
