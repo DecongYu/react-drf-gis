@@ -43,8 +43,8 @@ localhost:8080/api/v1/profile/me/
 
 ## 5. Update profile: <PATCH>
 
-localhost:8000/api/v1/profile/update/<username>/
+localhost:8080/api/v1/profile/update/<username>/
 
 ## 6. Create new user: <POST>
 
-localhost:8000/api/v1/profile/users
+localhost:8080/api/v1/profile/users
