@@ -175,7 +175,7 @@ SIMPLE_JWT = {
 
 # Djoser Authentication setups
 # https://djoser.readthedocs.io/en/latest/settings.html
-JOSER = {
+DJOSER = {
     "LOGIN_FIELD": "email",
     "SEND_CONFIRMATION_EMAIL": True,
     "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
@@ -188,10 +188,10 @@ JOSER = {
     "ACTIVATION_URL": "activate/{uid}/{token}",
     "SEND_ACTIVATION_EMAIL": True,
     "SERIALIZERS": {
-        "user_create": "apps.users.serializers.UserCreateSerializer,",
-        "user": "apps.users.serializers.UserSerializer,",
-        "current_user": "apps.users.serializers.UserSerializer,",
-        "user_delete": "apps.users.serializers.UserDeleteSerializer,",
+        "user_create": "apps.users.serializers.UserCreateSerializer",
+        "user": "apps.users.serializers.UserSerializer",
+        "current_user": "apps.users.serializers.UserSerializer",
+        "user_delete": "apps.users.serializers.UserDeleteSerializer",
     },
 }
 

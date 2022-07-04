@@ -20,16 +20,16 @@ services:
         networks:
             - drf-gis
 
-    # client:
-    #     build:
-    #         context: ./client
-    #         dockerfile: ./docker/local/Dockerfile
-    #     restart: on-failure
-    #     volumes:
-    #         - ./client:/app
-    #         - /app/node_modules
-    #     networks:
-    #         - drf-gis
+    front:
+        build:
+            context: ./front
+            dockerfile: ./docker/local/Dockerfile
+        restart: on-failure
+        volumes:
+            - ./front:/app
+            - /app/node_modules
+        networks:
+            - drf-gis
 
     postgres-db:
         image: postgis/postgis

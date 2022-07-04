@@ -32,7 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
             "profile_photo",
             "country",
             "city",
-            "top_seller",
+            "top_seller"
         ]
 
     def get_first_name(self, obj):
